@@ -66,6 +66,10 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = DB::table('users')->find($id);
+
+        return view('users.edit',[
+            'user' => $user
+        ]);
     }
 
     /**
@@ -77,7 +81,32 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['bail','required', 'string', 'max:191'],
+            'how_to_read' => ['required', 'string','max:191'],
+            'email' => ['required', 'string', 'email', 'max:191'],
+            'gmail' => ['required', 'string', 'email', 'max:191'],
+            'phone_no' => ['required', 'string' ],
+            'depart' => ['required'],
+            'post' => ['required', 'string','max:191'],
+           
+            
+        ]);
+            
+            
+            $request->user()->update([
+            'name' => $request->input('name'),
+            'how_to_read' => $request->input('how_to_read'),
+            'email' => $request->input('email'),
+            'gmail' => $request->input('gmail'),
+            'phone_no' => $request->input('phone_no'),
+            'depart'=> $request->input('depart'),
+            'post' => $request->input('post'),
+            
+        ]);
+
+                return redirect('/users');
+
     }
 
     /**
@@ -92,7 +121,7 @@ class UsersController extends Controller
             
                 
 
-            return view('/home');
+            return redirect('/users');
 
     }
 }

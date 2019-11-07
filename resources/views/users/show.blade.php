@@ -50,6 +50,7 @@
 
 </table>
 
+{!! link_to_route('users.edit','編集',[$user->id],['class' => 'btn btn-primary btn-lg']) !!}
 {!! Form::open(['route'=> ['users.destroy', $user -> id ], 'method' => 'delete']) !!}
     {!! Form::submit('削除',['class'=> 'btn btn-danger btn-lg']) !!}
 {!! Form::close() !!}
