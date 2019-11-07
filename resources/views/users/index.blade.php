@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<h1>社員一覧</h1>
 
 <table class='table table-bordered table-sm'>
     <tr>

@@ -28,7 +28,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $user = DB::table('users');
+
+        return view('users.create',[
+            'user' => $user
+        ]);
     }
 
     /**
@@ -39,7 +43,30 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate ([
+            'name' => ['required', 'string', 'max:191'],
+            'how_to_read' => ['required', 'string','max:191'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'gmail' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'phone_no' => ['required', 'string' ],
+            'depart' => ['required'],
+            'post' => ['required', 'string','max:191'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $request->user()->create([
+            'name' => $request->input('name'),
+            'how_to_read' => $request->input('how_to_read'),
+            'email' => $request->input('email'),
+            'gmail' => $request->input('gmail'),
+            'phone_no' => $request->input('phone_no'),
+            'depart'=> $request->input('depart'),
+            'post' => $request->input('post'),
+            'password' => $request->input('password'),
+            
+        ]);
+
+                return redirect('/users');
     }
 
     /**
