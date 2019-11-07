@@ -65,7 +65,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = DB::table('users')->find($id);
     }
 
     /**
@@ -88,12 +88,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = DB::table('users')->find($id);
-            if(\Auth::check){
-                $user -> delete();
-            }
+        $user = DB::table('users')->where('id',$id)->delete();
+            
+                
 
-            return back();
+            return view('/home');
 
     }
 }

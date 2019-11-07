@@ -5,7 +5,7 @@
 <table class='table table-bordered'>
 <tr>
     <th class='text-center'>名前</th>
-    <td class='text-center'>{{ $user -> name }}</td>
+    <td class='text-center'>{{ $user->name }}</td>
 </tr>
 <tr>
     <th class='text-center'>かな</th>
@@ -49,5 +49,9 @@
 </tr>
 
 </table>
+
+{!! Form::open(['route'=> ['users.destroy', $user -> id ], 'method' => 'delete']) !!}
+    {!! Form::submit('削除',['class'=> 'btn btn-danger btn-lg']) !!}
+{!! Form::close() !!}
 
 @endsection
