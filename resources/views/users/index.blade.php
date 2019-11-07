@@ -18,7 +18,7 @@
     </tr>
     <tr>
     @foreach($users as $user)
-        <td class='text-center'>{{ $user -> name }}</td>
+        <td class='text-center'><a href="{{ url('/users', $user->id) }}">{{ $user -> name }}</a></td>
         <td class='text-center'>{{ $user ->how_to_read }}</td>
         <td class='text-center'>{{ $user ->email }}</td>
         <td class='text-center'>{{ $user -> gmail }}</td>
@@ -32,5 +32,7 @@
     </tr>
     @endforeach
 </table>
+
+
 
 @endsection

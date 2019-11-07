@@ -50,7 +50,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = DB::find($id);
+        $user = DB::table('users')-> find($id);
 
         return view('users.show',[
             'user' => $user
@@ -88,6 +88,12 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = DB::table('users')->find($id);
+            if(\Auth::check){
+                $user -> delete();
+            }
+
+            return back();
+
     }
 }

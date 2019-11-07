@@ -2,33 +2,52 @@
 
 @section('content')
 
-<table class='table table-borederd'>
+<table class='table table-bordered'>
 <tr>
-    <th class='text center'>名前</th>
+    <th class='text-center'>名前</th>
+    <td class='text-center'>{{ $user -> name }}</td>
+</tr>
+<tr>
     <th class='text-center'>かな</th>
+    <td class='text-center'>{{ $user ->how_to_read }}</td>
+</tr>
+<tr>
     <th class='text-center'>BCメールアドレス</th>
+    <td class='text-center'>{{ $user ->email }}</td>
+</tr>
+<tr>
     <th class='text-center'>Gmailアドレス</th>
+    <td class='text-center'>{{ $user -> gmail }}</td>
+</tr>
+<tr>
     <th class='text-center'>携帯番号</th>
+    <td class='text-center'>{{ $user -> phone_no }}</td>
+</tr>
+<tr>
     <th class='text-center'>プロフィール画像</th>
+    <td class='text-center'></td>
+</tr>
+<tr>
     <th class='text-center'>部署</th>
+    <td class='text-center'>{{ $user -> depart }}</td>
+</tr>
+<tr>
     <th class='text-center'>役職</th>
+    <td class='text-center'>{{ $user -> post }}</td>
+</tr>
+<tr>
     <th class='text-center'>ログインPW</th>
+    <td class='text-center'>{{ $user -> password }}</td>
+</tr>
+<tr>
     <th class='text-center'>ログインID</th>
+    <td class='text-center'>{{ $user -> email }}</td>
+</tr>
+<tr>
     <th class='text-center'>最終ログイン</th>
-    </tr>
-    <tr>
-    @foreach($users as $user)
-        <td class='text-center'>{{ $user -> name }}</td>
-        <td class='text-center'>{{ $user ->how_to_read }}</td>
-        <td class='text-center'>{{ $user ->email }}</td>
-        <td class='text-center'>{{ $user -> gmail }}</td>
-        <td class='text-center'>{{ $user -> phone_no }}</td>
-        <td class='text-center'></td>
-        <td class='text-center'>{{ $user -> depart }}</td>
-        <td class='text-center'>{{ $user -> post }}</td>
-        <td class='text-center'>{{ $user -> password }}</td>
-        <td class='text-center'>{{ $user -> email }}</td>
-        <td class='text-center'></td>
-    </tr>
-    @endforeach
+    <td class='text-center'></td>
+</tr>
+
 </table>
+
+@endsection
