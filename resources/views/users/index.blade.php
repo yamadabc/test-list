@@ -13,7 +13,7 @@
         <th class='text-center'>プロフィール画像</th>
         <th class='text-center'>部署</th>
         <th class='text-center'>役職</th>
-        <th class='text-center'>ログインPW</th>
+        
         <th class='text-center'>ログインID</th>
         <th class='text-center'>最終ログイン</th>
     </tr>
@@ -27,9 +27,9 @@
         <td class='text-center'></td>
         <td class='text-center'>{{ $user -> depart }}</td>
         <td class='text-center'>{{ $user -> post }}</td>
-        <td class='text-center'>{{ $user -> password }}</td>
+        
         <td class='text-center'>{{ $user -> email }}</td>
-        <td class='text-center'></td>
+        <td class='text-center'>{{ $user -> last_login_at }}</td>
     </tr>
     @endforeach
 </table>
