@@ -15,9 +15,11 @@ class UsersController extends Controller
     public function index()
     {
         $users = DB::table('users')->get();
+        $passwords=DB::table('users')->value('password');
 
         return view('users.index',[
             'users' => $users,
+            'passwords'=> $passwords,
         ]);
     }
 

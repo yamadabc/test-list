@@ -64,7 +64,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item" href="{{ route('users.create') }}">社員登録</a>
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">社員一覧</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">社員登録</a>
+                                    
+                                   
                                 </div>
                             </li>
                         @endguest
