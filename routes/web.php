@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::resource('file','FileController',['only'=>['index','create','store']]);
+
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController',);
+    Route::get('users/check/{id}','UsersController@delete_check')->name('delete_check');
 });

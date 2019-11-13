@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLastLoginAtToUsersTable extends Migration
+class AddFileNameToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddLastLoginAtToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('last_login_at')->after('remember_token');
+            $table->string('file_name');
         });
     }
 
@@ -26,7 +26,7 @@ class AddLastLoginAtToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('last_login_at');
+            $table->dropColumn('file_name');
         });
     }
 }

@@ -19,7 +19,7 @@ class UsersController extends Controller
 
         return view('users.index',[
             'users' => $users,
-            'passwords'=> $passwords,
+           
         ]);
     }
 
@@ -54,8 +54,10 @@ class UsersController extends Controller
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            
         ]);
 
+        
         $request->user()->create([
             'name' => $request->input('name'),
             'how_to_read' => $request->input('how_to_read'),
@@ -65,6 +67,7 @@ class UsersController extends Controller
             'depart'=> $request->input('depart'),
             'post' => $request->input('post'),
             'password' => $request->input('password'),
+            
             
         ]);
 
@@ -118,11 +121,19 @@ class UsersController extends Controller
             'phone_no' => ['required', 'string' ],
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
-           
+            'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
             
         ]);
-            
-            
+        
+        
+        if($file = $request->file_name){
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $target_path = public_path('/uploads/');
+            $file->move($target_path,$name);
+        }else{
+            $name = "";
+        }
+
             $request->user()->update([
             'name' => $request->input('name'),
             'how_to_read' => $request->input('how_to_read'),
@@ -131,6 +142,7 @@ class UsersController extends Controller
             'phone_no' => $request->input('phone_no'),
             'depart'=> $request->input('depart'),
             'post' => $request->input('post'),
+            'file_name' => $name,
             
         ]);
 
@@ -152,5 +164,14 @@ class UsersController extends Controller
 
             return redirect('/users');
 
+    }
+
+    public function delete_check($id)
+    {
+        $user = DB::table('users')->find($id);
+
+        return view('users.delete_check',[
+            'user' => $user
+        ]);
     }
 }

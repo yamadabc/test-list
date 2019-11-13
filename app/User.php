@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -17,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','how_to_read','gmail','phone_no','depart','post',
+        'name', 'email', 'password','how_to_read','gmail','phone_no','depart','post','file_name',
     ];
 
     /**
@@ -37,6 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordReserNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     
 }

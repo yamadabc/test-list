@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<div class='row'>
+<div class='col-md-10 offset-md-1'>
 <h1>社員一覧</h1>
 
 <table class='table table-bordered table-sm'>
@@ -24,15 +26,17 @@
         <td class='text-center'>{{ $user ->email }}</td>
         <td class='text-center'>{{ $user -> gmail }}</td>
         <td class='text-center'>{{ $user -> phone_no }}</td>
-        <td class='text-center'></td>
+        <td class='text-center'><img src="/uploads/{{ $user->file_name }}"></td>
         <td class='text-center'>{{ $user -> depart }}</td>
         <td class='text-center'>{{ $user -> post }}</td>
         
         <td class='text-center'>{{ $user -> email }}</td>
-        <td class='text-center'>{{ $user -> last_login_at }}</td>
+        <td class='text-center'></td>
     </tr>
     @endforeach
 </table>
+</div>
+</div>
 
 
 

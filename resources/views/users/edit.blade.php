@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>編集ページ</h1>
+
 
 @if($errors->any())
     <div class="alert alert-danger">
@@ -15,8 +15,9 @@
 @endif
 
 <div class="row">
-    <div class="col-6">
-    {!! Form::model($user,['route' => ['users.update', $user->id],'method'=>'put']) !!}
+    <div class="col-6 offset-3">
+    <h2>編集ページ</h2>
+    {!! Form::model($user,['route' => ['users.update', $user->id],'method'=>'put','files'=> true, 'enctype'=>'multipart/form-data']) !!}
 
         <div class='form-group'>
             {!! Form::label('name', '名前') !!}
@@ -54,6 +55,12 @@
             @enderror
         </div>
         <div class='form-group'>
+            {!! Form::label('file_name','プロフィール画像') !!}
+            {!! Form::file('file_name') !!}
+            @error('file_name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        <div class='form-group'>
             {!! Form::label('depart','部署') !!}
             @php
                 $depart_loop =[
@@ -79,7 +86,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
         </div>
-        
+
 
         {!! Form::submit('登録',['class'=> 'btn btn-primary btn-block mt-3']) !!}
         {!! Form::close() !!}

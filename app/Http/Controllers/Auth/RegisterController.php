@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 class RegisterController extends Controller
 {
     /*
@@ -57,6 +57,8 @@ class RegisterController extends Controller
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
+
         ]);
     }
 
@@ -68,15 +70,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'how_to_read' => $data['how_to_read'],
-            'email' => $data['email'],
-            'gmail' => $data['gmail'],
-            'phone_no' => $data['phone_no'],
-            'depart'=> $data['depart'],
-            'post' => $data['post'],
-            'password' => Hash::make($data['password']),
-        ]);
+       
+
+    if($file = $data['file_name']){
+        $name = time().'.'.$file->getClientOriginalExtension();
+        $target_path = public_path('/uploads/');
+        $file->move($target_path,$name);
+    }
+    
+    
+    return User::create([
+        'name' => $data['name'],
+        'how_to_read' => $data['how_to_read'],
+        'email' => $data['email'],
+        'gmail' => $data['gmail'],
+        'phone_no' => $data['phone_no'],
+        'depart'=> $data['depart'],
+        'post' => $data['post'],
+        'file_name'=>$name,
+        'password' => Hash::make($data['password']),
+        
+    ]);
+    
+    
+        
     }
 }
