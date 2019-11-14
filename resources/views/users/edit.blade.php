@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-6 offset-3">
     <h2>編集ページ</h2>
-    {!! Form::model($user,['route' => ['users.update', $user->id],'method'=>'put','files'=> true, 'enctype'=>'multipart/form-data']) !!}
+    {!! Form::model($user,['route' => ['users.update', $user->id],'method'=>'put']) !!}
 
         <div class='form-group'>
             {!! Form::label('name', '名前') !!}
@@ -54,12 +54,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class='form-group'>
-            {!! Form::label('file_name','プロフィール画像') !!}
-            {!! Form::file('file_name') !!}
-            @error('file_name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+        
         <div class='form-group'>
             {!! Form::label('depart','部署') !!}
             @php

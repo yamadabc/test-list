@@ -116,19 +116,20 @@
                             </div>
                         </div>
 
-                        <div class='form-group row'>
+                        <div class="form-group row">
+                            <label for="file_name" class="col-md-4 col-form-label text-md-right">プロフィール写真</label>
 
-                            <div class='col-md-6 offset-md-4'>
-                                <input type='file' class="@error('file_name') is-invalid @enderror" name='file_name' autofocus>
+                            <div class="col-md-6">
+                                <input id="file_name" type="file" class="@error('post') is-invalid @enderror" name="file_name" autofocus>
 
                                 @error('file_name')
-                                    <span class='invalid-feedback' role='alert'>
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-                       
+
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

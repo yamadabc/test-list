@@ -15,7 +15,7 @@
                         @endphp
                     </div>
                 @endif
-                <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class='form-group'>
                         <input type="file" name="filename" id="filename">
@@ -23,7 +23,7 @@
                     </div>
                         
             
-                    <button type='submit' class='btn btn-primary'>送信する</button>
+                    <button type='submit' class='btn btn-primary'>登録する</button>
                 </form>
 
             </div>

@@ -20,9 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::resource('file','FileController',['only'=>['index','create','store']]);
+Route::resource('files','FileController',['only'=>['index','create','store','edit','upload']]);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController',);
     Route::get('users/check/{id}','UsersController@delete_check')->name('delete_check');
+    Route::get('users/{id}/edit_image','UsersController@edit_image')->name('edit_image');
+    Route::put('users/{id}/update_image','UsersController@update_image')->name('update_image');
 });

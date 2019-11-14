@@ -26,7 +26,12 @@
         <td class='text-center'>{{ $user ->email }}</td>
         <td class='text-center'>{{ $user -> gmail }}</td>
         <td class='text-center'>{{ $user -> phone_no }}</td>
-        <td class='text-center'><img src="/uploads/{{ $user->file_name }}"></td>
+        
+        <td class='text-center'> 
+        <img src="/uploads/{{ $user->file_name }}">
+        
+        </td>
+        
         <td class='text-center'>{{ $user -> depart }}</td>
         <td class='text-center'>{{ $user -> post }}</td>
         

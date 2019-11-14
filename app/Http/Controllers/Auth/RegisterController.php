@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/users';
 
     /**
      * Create a new controller instance.
@@ -58,7 +58,6 @@ class RegisterController extends Controller
             'post' => ['required', 'string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
-
         ]);
     }
 
@@ -71,12 +70,16 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
        
-
-    if($file = $data['file_name']){
-        $name = time().'.'.$file->getClientOriginalExtension();
-        $target_path = public_path('/uploads/');
-        $file->move($target_path,$name);
-    }
+        if(!empty($data['file_name'])){
+            $file=$data['file_name'];
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $target_path = public_path('/uploads/');
+            $file->move($target_path,$name);
+            
+        }else{
+            $name ="";
+        }
+        
     
     
     return User::create([
@@ -87,9 +90,8 @@ class RegisterController extends Controller
         'phone_no' => $data['phone_no'],
         'depart'=> $data['depart'],
         'post' => $data['post'],
-        'file_name'=>$name,
         'password' => Hash::make($data['password']),
-        
+        'file_name'=>$name,
     ]);
     
     

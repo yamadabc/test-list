@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
 use DB;
 
@@ -54,8 +55,17 @@ class UsersController extends Controller
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            
+            'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
         ]);
+
+        if($file = $request->file_name){
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $target_path = public_path('/uploads/');
+            $file->move($target_path,$name);
+        
+        }else{
+            $name = "";
+        }
 
         
         $request->user()->create([
@@ -67,7 +77,7 @@ class UsersController extends Controller
             'depart'=> $request->input('depart'),
             'post' => $request->input('post'),
             'password' => $request->input('password'),
-            
+            'file_name' => $name,
             
         ]);
 
@@ -97,7 +107,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = DB::table('users')->find($id);
+        $user = DB::table('users')->where('id',$id)->select('id','name','how_to_read','email','gmail','phone_no','depart','post')->first();
 
         return view('users.edit',[
             'user' => $user
@@ -121,18 +131,11 @@ class UsersController extends Controller
             'phone_no' => ['required', 'string' ],
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
-            'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
+            
             
         ]);
         
         
-        if($file = $request->file_name){
-            $name = time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/');
-            $file->move($target_path,$name);
-        }else{
-            $name = "";
-        }
 
             $request->user()->update([
             'name' => $request->input('name'),
@@ -142,7 +145,7 @@ class UsersController extends Controller
             'phone_no' => $request->input('phone_no'),
             'depart'=> $request->input('depart'),
             'post' => $request->input('post'),
-            'file_name' => $name,
+            
             
         ]);
 
@@ -173,5 +176,31 @@ class UsersController extends Controller
         return view('users.delete_check',[
             'user' => $user
         ]);
+    }
+
+    public function edit_image($id)
+    {
+        $user = DB::table('users')->where('id',$id)->select('id','file_name')->first();
+
+        return view('users.edit_image',[
+            'user' => $user
+        ]);
+    }
+
+    public function update_image(Request $request,$id)
+    {
+        $request->validate([
+            'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
+        ]);
+
+        if($file = $request->file_name){
+        $name = time().'.'.$file->getClientOriginalExtension();
+        $target_path = public_path('/uploads/');
+        $file->move($target_path,$name);
+        }
+        $request->user()->update([
+            'file_name'=>$name,
+        ]);
+        return redirect('/users');
     }
 }
