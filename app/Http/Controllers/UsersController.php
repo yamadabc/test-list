@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = DB::table('users')->get();
-        $passwords=DB::table('users')->value('password');
+        
 
         return view('users.index',[
             'users' => $users,
@@ -51,7 +52,7 @@ class UsersController extends Controller
             'how_to_read' => ['required', 'string','max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'gmail' => ['required', 'string', 'email', 'max:191', 'unique:users'],
-            'phone_no' => ['required', 'string' ],
+            'phone_no' => ['required', 'regex:/\A\d{11}\z/' ],
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -128,7 +129,7 @@ class UsersController extends Controller
             'how_to_read' => ['required', 'string','max:191'],
             'email' => ['required', 'string', 'email', 'max:191'],
             'gmail' => ['required', 'string', 'email', 'max:191'],
-            'phone_no' => ['required', 'string' ],
+            'phone_no' => ['required', 'regex:/\A\d{11}\z/' ],
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             
@@ -145,7 +146,7 @@ class UsersController extends Controller
             'phone_no' => $request->input('phone_no'),
             'depart'=> $request->input('depart'),
             'post' => $request->input('post'),
-            
+           
             
         ]);
 
@@ -203,4 +204,27 @@ class UsersController extends Controller
         ]);
         return redirect('/users');
     }
+
+    public function reset_password($id)
+    {
+        $user = DB::table('users')->where('id',$id)->select('id','password')->first();
+
+        return view('users.reset_password',[
+            'user' => $user
+        ]);
+    }
+
+    public function update_password(Request $request,$id)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        return redirect('users');
+    }
+
 }

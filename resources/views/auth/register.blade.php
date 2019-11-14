@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">新入社員登録</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype='multipart/form-data'>
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">名前</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">＊名前</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">ふりがな</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">＊ふりがな</label>
 
                             <div class="col-md-6">
                                 <input id="how_to_read" type="text" class="form-control @error('how_to_read') is-invalid @enderror" name="how_to_read" value="{{ old('how_to_read') }}" required autocomplete="how_to_read" autofocus>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">BCアドレス</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">＊BCアドレス</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="gmail" class="col-md-4 col-form-label text-md-right">Gmailアドレス</label>
+                            <label for="gmail" class="col-md-4 col-form-label text-md-right">＊Gmailアドレス</label>
 
                             <div class="col-md-6">
                                 <input id="gmail" type="gmail" class="form-control @error('gmail') is-invalid @enderror" name="gmail" value="{{ old('gmail') }}" required autocomplete="gmail">
@@ -68,11 +68,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_no" class="col-md-4 col-form-label text-md-right">携帯電話</label>
+                            <label for="phone_no" class="col-md-4 col-form-label text-md-right">＊携帯電話</label>
 
                             <div class="col-md-6">
                                 <input id="phone_no" type="text" class="form-control @error('phone_no') is-invalid @enderror" name="phone_no" value="{{ old('phone_no') }}" required autocomplete="phone_no" autofocus>
-
+                                <small text='muted'>*ハイフン(-)なしで入力してください。</small>
                                 @error('phone_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="depart" class="col-md-4 col-form-label text-md-right">部署</label>
+                            <label for="depart" class="col-md-4 col-form-label text-md-right">＊部署</label>
 
                             <div class="col-md-6">
                                 <select class="form-control @error('depart') is-invalid @enderror" name="depart" value="{{ old('depart') }}" required autocomplete="depart" autofocus>
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="post" class="col-md-4 col-form-label text-md-right">役職</label>
+                            <label for="post" class="col-md-4 col-form-label text-md-right">＊役職</label>
 
                             <div class="col-md-6">
                                 <input id="post" type="text" class="form-control @error('post') is-invalid @enderror" name="post" value="{{ old('post') }}" required autocomplete="post" autofocus>
@@ -132,7 +132,7 @@
 
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">＊パスワード</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -146,7 +146,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">＊パスワード確認</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -156,7 +156,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    登録する
                                 </button>
                             </div>
                         </div>

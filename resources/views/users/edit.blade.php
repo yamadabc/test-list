@@ -34,7 +34,7 @@
             @enderror
         </div>
         <div class='form-group'>
-            {!! Form::label('email','BCメールアドレス') !!}
+            {!! Form::label('email','BCメールアドレス') !!} <small text='muted'>*ログイン用メールアドレス</small>
             {!! Form::email('email',old('email'),['class'=>'form-control']) !!}
             @error('email')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -48,7 +48,7 @@
             @enderror
         </div>
         <div class='form-group'>
-            {!! Form::label('phone_no','携帯電話') !!}
+            {!! Form::label('phone_no','携帯電話') !!} <small text='muted'>*ハイフン(-)なしで入力してください。</small>
             {!! Form::text('phone_no',old('phone_no'),['class' => 'form-control']) !!}
             @error('phone_no')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -81,8 +81,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
         </div>
-
-
+        
         {!! Form::submit('登録',['class'=> 'btn btn-primary btn-block mt-3']) !!}
         {!! Form::close() !!}
     </div>

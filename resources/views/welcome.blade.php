@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-   
-    {!! link_to_route('login', 'Login', [], ['class' => 'btn btn-lg btn-primary']) !!} 
-        
+    <div class='text-center'>
+        {!! link_to_route('login', 'ログインする', [], ['class' => 'btn btn-lg btn-outline-info']) !!} 
+    </div>
 
 @endsection

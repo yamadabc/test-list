@@ -49,12 +49,16 @@
     <th class='text-center'>ログインID</th>
     <td class='text-center'>{{ $user -> email }}</td>
 </tr>
+<tr>
+    <th class='text-center'>最終ログイン</th>
+    <td class='text-center'>{{ $user -> last_login_at }}</td>
+</tr>
 
 </table>
 
 @if(\Auth::id() === $user -> id)
 {!! link_to_route('users.edit','編集',[$user->id],['class' => 'btn btn-primary btn-lg']) !!}
-{!! link_to_route('password.email','パスワードの変更',[$user->id],['class'=>'btn btn-outline-primary btn-lg'])!!}
+{!! link_to_route('reset_password','パスワードの変更',[$user->id],['class'=>'btn btn-outline-primary btn-lg']) !!}
 @endif
 
 

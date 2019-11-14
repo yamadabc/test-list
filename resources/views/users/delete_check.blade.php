@@ -6,7 +6,7 @@
     <div class='row justify-content-center'>
         
             <div class='card'>
-                <div class='card-body'>
+                <div class='card-body text-center'>
                     <h5 class='card-text'>本当に{{ $user->name }}を削除してよろしいですか？</h5>
                         <div class='btn-toolbar'>
                             <div class='btn-group'>
