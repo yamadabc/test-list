@@ -29,7 +29,7 @@
 <tr>
     <th class='text-center'>プロフィール画像</th>
     <td class='text-center'>
-        <img src="/uploads/{{ $user -> file_name }}"> 
+        <img class='img' src="/uploads/{{ $user -> file_name }}"> 
         @if(Auth::id() === $user -> id)
         {!! link_to_route('edit_image','プロフィール画像の変更をする',[$user->id]) !!}
         @endif

@@ -7,6 +7,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+ img.img{
+   height:200px;
+   width:150px;
+ }
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;

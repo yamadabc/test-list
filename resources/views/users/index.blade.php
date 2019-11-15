@@ -31,7 +31,7 @@
         <td class='text-center'>{{ $user -> depart }}</td>
         <td class='text-center'>{{ $user -> post }}</td>
         <td class='text-center'> 
-            <img src="/uploads/{{ $user->file_name }}">
+            <img class='img' src="/uploads/{{ $user->file_name }}">
         </td>
         <td class='text-center'>{{ $user -> email }}</td>
         <td class='text-center'>{{ $user -> last_login_at }}</td>

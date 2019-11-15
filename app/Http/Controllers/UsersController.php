@@ -94,9 +94,11 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = DB::table('users')-> find($id);
-
+        
+        
         return view('users.show',[
-            'user' => $user
+            'user' => $user,
+           
         ]);
     }
 
@@ -136,7 +138,7 @@ class UsersController extends Controller
             
         ]);
         
-        
+            
 
             $request->user()->update([
             'name' => $request->input('name'),
@@ -190,19 +192,26 @@ class UsersController extends Controller
 
     public function update_image(Request $request,$id)
     {
-        $request->validate([
+        
+        $request->validate ([
+            
             'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
         ]);
 
         if($file = $request->file_name){
-        $name = time().'.'.$file->getClientOriginalExtension();
-        $target_path = public_path('/uploads/');
-        $file->move($target_path,$name);
+            $name = time().'.'.$file->getClientOriginalExtension();
+            $target_path = public_path('/uploads/');
+            $file->move($target_path,$name);
         }
+
+        
         $request->user()->update([
-            'file_name'=>$name,
+            'file_name' => $name,
+            
         ]);
-        return redirect('/users');
+
+                return redirect('/users');
+        
     }
 
     public function reset_password($id)
