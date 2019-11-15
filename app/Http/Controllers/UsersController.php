@@ -52,7 +52,7 @@ class UsersController extends Controller
             'how_to_read' => ['required', 'string','max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'gmail' => ['required', 'string', 'email', 'max:191', 'unique:users'],
-            'phone_no' => ['required', 'regex:/\A\d{11}\z/' ],
+            'phone_no' => ['required', 'regex:/(0)[0-9]{10}/' ],
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -129,7 +129,7 @@ class UsersController extends Controller
             'how_to_read' => ['required', 'string','max:191'],
             'email' => ['required', 'string', 'email', 'max:191'],
             'gmail' => ['required', 'string', 'email', 'max:191'],
-            'phone_no' => ['required', 'regex:/\A\d{11}\z/' ],
+            'phone_no' => ['required', 'regex:/(0)[0-9]{10}/' ],
             'depart' => ['required'],
             'post' => ['required', 'string','max:191'],
             
