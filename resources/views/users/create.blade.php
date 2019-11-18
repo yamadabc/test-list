@@ -19,7 +19,7 @@
     {!! Form::model($user ,['route' => 'users.store']) !!}
 
         <div class='form-group'>
-            {!! Form::label('name', '名前') !!}
+            {!! Form::label('name', '名前') !!}<span class='badge-pill badge-danger' style='margin:5px;'>必須 </span>
             {!! Form::text('name',old('name'), ['class'=>'form-control']) !!}
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>

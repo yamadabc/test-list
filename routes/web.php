@@ -30,4 +30,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('users/{id}/update_image','UsersController@update_image')->name('update_image');
     Route::get('users/{id}/reset_password','UsersController@reset_password')->name('reset_password');
     Route::put('users/{id}/update_password','UsersController@update_password')->name('update_password');
-});
+    
+    Route::get('users/{id}/mypage','UsersController@mypage')->name('mypage');
+    });

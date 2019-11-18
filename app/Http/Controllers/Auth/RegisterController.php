@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'gmail' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone_no' => ['required', 'regex:/(0)[0-9]{10}/' ],
             'depart' => ['required'],
-            'post' => ['required', 'string','max:191'],
+            'post' => ['required','string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
         ]);
@@ -80,7 +80,7 @@ class RegisterController extends Controller
             $name ="";
         }
         
-    
+
     
     return User::create([
         'name' => $data['name'],

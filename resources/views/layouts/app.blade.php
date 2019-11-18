@@ -22,24 +22,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @if(Auth::check())
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/users') }}">
                     社員管理ページ
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -51,37 +42,46 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <ul class='navbar-nav'>
+                            
+                                    <li ckass='nav-item'>
+                                        <a class="nav-link" href="{{ route('users.index') }}">社員一覧</a>
+                                    </li>
+                                    <li ckass='nav-item'>
+                                        <a class="nav-link" href="{{ route('register') }}">社員登録</a>
+                                    </li>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <a class="dropdown-item" href="{{ route('users.index') }}">社員一覧</a>
-                                    <a class="dropdown-item" href="{{ route('register') }}">社員登録</a>
+                                    <li class='nav-item dropdown'>
                                     
-                                   
-                                </div>
-                            </li>
+                                    <a href="#" class='nav-link dropdown-toggle' data-toggle='dropdown'>{{ Auth::user() -> name }}</a>
+                                    <div class='dropdown-menu'>
+                                        {!! link_to_route('mypage', 'マイページ' ,['id'=>Auth::id()],['class'=>'dropdown-item']) !!}
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        </li>
+                                        <li ckass='nav-item'>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                    </li>
+
+                            </ul>
+                               
+                            
                         @endguest
-                    </ul>
+                    
                 </div>
             </div>
         </nav>
-
+        @endif
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
-
+<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
 </html>

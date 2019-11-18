@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->orderby('id')->paginate(5);
+        $users = DB::table('users')->orderBy('depart')->paginate(6);
         
 
         return view('users.index',[
@@ -54,7 +55,7 @@ class UsersController extends Controller
             'gmail' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone_no' => ['required', 'regex:/(0)[0-9]{10}/' ],
             'depart' => ['required'],
-            'post' => ['required', 'string','max:191'],
+            'post' => ['required','string','max:191'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'file_name' => ['image','mimes:jpeg,png,jpg,bmb','max:2048'],
         ]);
@@ -68,7 +69,6 @@ class UsersController extends Controller
             $name = "";
         }
 
-        
         $request->user()->create([
             'name' => $request->input('name'),
             'how_to_read' => $request->input('how_to_read'),
@@ -234,6 +234,15 @@ class UsersController extends Controller
         ]);
 
         return redirect('users');
+    }
+
+    public function mypage($id)
+    {
+        $user = Auth::user();
+
+        return view('users.mypage',[
+            'user' => $user
+        ]);
     }
 
 }
