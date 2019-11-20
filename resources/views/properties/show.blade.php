@@ -59,6 +59,8 @@
                 <td>{{ $property -> updated_at }}</td>
             </tr>
         </table>
+
+        {!! link_to_route('properties.delete_check','削除',[$property->id],['class'=> 'btn btn-danger btn-lg']) !!}
     </div>
 </div>
 

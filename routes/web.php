@@ -34,4 +34,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('users/{id}/mypage','UsersController@mypage')->name('mypage');
 
     Route::resource('properties','PropertiesController');
+    Route::get('properties/delete_check/{id}','PropertiesController@delete_check')->name('properties.delete_check');
     });

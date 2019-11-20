@@ -131,6 +131,17 @@ class PropertiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('properties')->where('id',$id)->delete();
+
+        return redirect('/properties');
+    }
+
+    public function delete_check($id)
+    {
+        $property = DB::table('properties')->find($id);
+
+        return view('properties.delete_check',[
+            'property'=>$property,
+        ]);
     }
 }
