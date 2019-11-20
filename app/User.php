@@ -42,6 +42,10 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    public function property()
+    {
+        return $this->hasOne('App\Property');
+    }
     
 
     

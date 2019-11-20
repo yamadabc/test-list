@@ -44,11 +44,18 @@
                         @else
                         <ul class='navbar-nav'>
                             
-                                    <li ckass='nav-item'>
+                                    <li class='nav-item'>
                                         <a class="nav-link" href="{{ route('users.index') }}">社員一覧</a>
                                     </li>
-                                    <li ckass='nav-item'>
+                                    <li class='nav-item'>
                                         <a class="nav-link" href="{{ route('register') }}">社員登録</a>
+                                    </li>
+                                    <li class='nav-item dropdown'>
+                                        <a class='nav-link dropdown-toggle' href="#" data-toggle='dropdown'>売買統合版</a>
+                                        <div class='dropdown-menu'>
+                                            <a class='dropdown-item' href="{{ route('properties.create') }}">新規登録</a>
+                                            <a class='dropdown-item' href="{{ route('properties.index') }}">物件一覧</a>
+                                        </div>
                                     </li>
 
                                     <li class='nav-item dropdown'>

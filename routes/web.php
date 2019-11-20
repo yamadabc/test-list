@@ -32,4 +32,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('users/{id}/update_password','UsersController@update_password')->name('update_password');
     
     Route::get('users/{id}/mypage','UsersController@mypage')->name('mypage');
+
+    Route::resource('properties','PropertiesController');
     });
