@@ -202,7 +202,7 @@
                     <label for='age'>築年月<span class='badge-pill badge-danger' style='margin:5px;'>必須 </span></label>
                 </th>
                 <td>
-                    <select id='age' name='age'>
+                    <select id='age' name='build_year'>
                         <option value='age'>西暦/和暦</option>
                         <option value='1970'>1970年/昭和45年</option>
                         <option value='1971'>1971年/昭和46年</option>
@@ -258,8 +258,10 @@
                         <option value='2019'>2019年/令和1年</option>
                         <option value='2020'>2020年/令和2年</option>
                       </select>
-
-                      <select id='age' name='age'>
+                      @error('build_year')
+                        <div class='alert alert-danger'>{{ $message }}</div>
+                      @enderror
+                      <select id='age' name='build_month'>
                         <option value='age'>月</option>
                         <option value='1月'>1月</option>
                         <option value='2月'>2月</option>
@@ -274,7 +276,7 @@
                         <option value='11月'>11月</option>
                         <option value='12月'>12月</option>
                       </select>
-                      @error('age')
+                      @error('build_month')
                         <div class='alert alert-danger'>{{ $message }}</div>
                       @enderror
                 </td>

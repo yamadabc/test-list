@@ -20,13 +20,14 @@
         <th>築年数</th>
         <th>満室想定(万)</th>
     </tr>
+    @foreach($properties as $property)
     <tr>
-        @foreach($properties as $property)
         <td>{{ $property-> created_at }}</td>
         <td>{{ $property -> updated_at }}</td>
         <td>{{ $property -> user_name }}</td>
-        <td><a href="https://maps.google.co.jp/maps/search/{{ $property ->prefecture . $property -> town . $property -> house_number}}">リンク</a>
-        <td>{{ $property -> property_name }}</td>
+        <td>{{ $property -> status }}</td>
+        <td><a href="https://maps.google.co.jp/maps/search/{{ $property ->prefecture . $property -> town . $property -> house_number}}">リンク</a></td>
+        <td><a href="{{ url('/properties', $property -> id) }}">{{ $property -> property_name }}</a></td>
         <td>{{ $property -> price }}</td>
         <td>{{ ($property -> price * 10000)/ $property -> full_price }}</td>
         <td>{{ $property -> limit_price }}</td>
@@ -34,10 +35,10 @@
         <td>{{ $property -> prefecture }}</td>
         <td>{{ $property -> town }}</td>
         <td>{{ $property -> structure }}</td>
-        <td>{{ date('Y') - $property->age }}</td>
+        <td>{{ $property -> build_year}}</td>
         <td>{{ $property -> full_price }}</td>
-        @endforeach
     </tr>
+    @endforeach
 </table>
 
 @endsection

@@ -17,9 +17,11 @@ class PropertiesController extends Controller
     public function index()
     {
         $properties = DB::table('properties')->get();
+        $today = date("Y");
 
         return view('properties.index',[
             'properties' => $properties,
+            'today' => $today,
         ]);
     }
 
@@ -57,7 +59,8 @@ class PropertiesController extends Controller
             'price' => 'required|max:191',
             'limit_price' => 'required|max:191',
             'full_price' => 'required|max:191',
-            'age' => 'required|max:191',
+            'build_year' => 'required|max:191',
+            'build_month' => 'required|max:191',
             'structure' =>'required|max:191',
         ]);
 
@@ -72,7 +75,8 @@ class PropertiesController extends Controller
             $property -> price = $request->input('price');
             $property -> limit_price = $request->input('limit_price');
             $property -> full_price = $request->input('full_price');
-            $property -> age = $request->input('age');
+            $property -> build_year = $request->input('build_year');
+            $property -> build_month = $request->input('build_month');
             $property -> structure = $request->input('structure');
             $property -> user_id = $user_id;
             $property -> save();
@@ -89,7 +93,11 @@ class PropertiesController extends Controller
      */
     public function show($id)
     {
-        //
+        $property = DB::table('properties')->find($id);
+
+        return view('properties.show',[
+            'property' => $property,
+        ]);
     }
 
     /**
