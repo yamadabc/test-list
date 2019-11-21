@@ -40,7 +40,11 @@
             </tr>
             <tr>
                 <th>築年数</th>
-                <td></td>
+                @if( $property -> build_month <= $this_month)
+                    <td>{{ ($this_year - $property -> build_year) -1}}年</td>
+                @else
+                    <td>{{ $this_year - $property -> build_year }}年</td>
+                @endif
             </tr>
             <tr>
                 <th>満室想定</th>
@@ -59,9 +63,11 @@
                 <td>{{ $property -> updated_at }}</td>
             </tr>
         </table>
-
+        </div>
+        <div class='row col-md-2 offset-5'>
+        {!! link_to_route('properties.edit','編集',[$property->id],['class'=> 'btn btn-primary btn-lg']) !!}
         {!! link_to_route('properties.delete_check','削除',[$property->id],['class'=> 'btn btn-danger btn-lg']) !!}
-    </div>
+        </div>
 </div>
 
 @endsection

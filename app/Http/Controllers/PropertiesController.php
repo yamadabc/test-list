@@ -17,11 +17,13 @@ class PropertiesController extends Controller
     public function index()
     {
         $properties = DB::table('properties')->get();
-        $today = date("Y");
+        $this_year = date("Y");
+        $this_month = date("m");
 
         return view('properties.index',[
             'properties' => $properties,
-            'today' => $today,
+            'this_year' => $this_year,
+            'this_month' => $this_month,
         ]);
     }
 
@@ -56,9 +58,9 @@ class PropertiesController extends Controller
             'prefecture' => 'required|string|max:191',
             'town' => 'required|string|max:191',
             'house_number'=>'required|string|max:191',
-            'price' => 'required|max:191',
-            'limit_price' => 'required|max:191',
-            'full_price' => 'required|max:191',
+            'price' => 'required|numeric|max:191',
+            'limit_price' => 'required|numeric|max:191',
+            'full_price' => 'required|numeric|max:191',
             'build_year' => 'required|max:191',
             'build_month' => 'required|max:191',
             'structure' =>'required|max:191',
@@ -82,7 +84,7 @@ class PropertiesController extends Controller
             $property -> save();
        
 
-        return redirect('/users');
+        return redirect('/properties');
     }
 
     /**
@@ -94,9 +96,13 @@ class PropertiesController extends Controller
     public function show($id)
     {
         $property = DB::table('properties')->find($id);
-
+        $this_year = date("Y");
+        $this_month = date("m");
+        
         return view('properties.show',[
             'property' => $property,
+            'this_year' => $this_year,
+            'this_month' => $this_month,
         ]);
     }
 
@@ -108,7 +114,13 @@ class PropertiesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $property = DB::table('properties')->find($id);
+        $names = DB::table('users')->pluck('name');
+        
+        return view('properties.edit',[
+            'property' => $property,
+            'names' => $names,
+        ]);
     }
 
     /**
@@ -120,7 +132,43 @@ class PropertiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $request->validate([
+            'user_name'=>'required|string|max:191',
+            'status' => 'max:191',
+            'property_name' =>'required|max:191',
+            'prefecture' => 'required|string|max:191',
+            'town' => 'required|string|max:191',
+            'house_number'=>'required|string|max:191',
+            'price' => 'required|',
+            'limit_price' => 'required|',
+            'full_price' => 'required|numeric|',
+            'build_year' => 'required|max:191',
+            'build_month' => 'required|max:191',
+            'structure' =>'required|max:191',
+        ]);
+        
+            
+        $user_id = Auth::id();
+        $property = Property::find($id);
+        $property -> user_name = $request->input('user_name'); 
+        $property -> status =$request->input('status');
+        $property -> property_name = $request->input('property_name');
+        $property -> prefecture = $request->input('prefecture');
+        $property -> town = $request->input('town');
+        $property -> house_number = $request->input('house_number');
+        $property -> price = $request->input('price');
+        $property -> limit_price = $request->input('limit_price');
+        $property -> full_price = $request->input('full_price');
+        $property -> build_year = $request->input('build_year');
+        $property -> build_month = $request->input('build_month');
+        $property -> structure = $request->input('structure');
+        $property -> user_id = $user_id;
+        $property -> save();
+            
+       
+
+                return redirect('/properties');
     }
 
     /**

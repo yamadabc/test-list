@@ -15,8 +15,9 @@
                <label for='user_name'>情報入手者<br><span class='badge-pill badge-danger' style='margin:5px;'>必須 </span></label>
             </th>
             <td>
-                @foreach($names as $name)
+                
                 <div class='btn-group btn-group-toggle' data-toggle='buttons'>
+                @foreach($names as $name)
                 <label class='btn btn-outline-secondary'>
                     <input type='radio' name='user_name' id='user_name' class="@error('user_name') is-invalid @enderror" value="{{ $name }}">{{ $name }}
                 </label>
@@ -42,13 +43,13 @@
                 <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="なし"> なし
                 <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="要返答"> 要返答
                 <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="返答待ち"> 返答待ち
-                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="値価待ち"> 値価待ち
+                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="値下待ち"> 値下待ち
                 <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="定期連絡"> 定期連絡
                 <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="見送り"> 見送り
                 <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="売止"> 売止<br>
-                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="他決（契約前）"> 他決（契約前）
-                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="他決（契約済）"> 他決（契約済）
-                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="他決（決済済）"> 他決（決済済）
+                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="他決(契約前)"> 他決(契約前)
+                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="他決(契約済)"> 他決(契約済)
+                <input type='radio' class="@error('status') is-invalid @enderror" name="status" value="他決(決済済)"> 他決(決済済)
                 @error('status')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -148,8 +149,8 @@
                 <label for='price'>入手価格<br><span class='badge-pill badge-danger' style='margin:5px;'>必須 </span></label>
               </th>
               <td>
-                <div class='input-group-prepend mb-3'>
-                <input id='price' type='text' class="form-control @error('price') is-invalid @enderror" name='price' value="{{ old('price') }}" required autocomplete="price" autofocus aria-describedby="basic-addon1">
+                <div class='input-group-prepend'>
+                <input id='price' type='text' class="@error('price') is-invalid @enderror" name='price' value="{{ old('price') }}" required autocomplete="price" autofocus aria-describedby="basic-addon1">
                 <div class='input-group-append'>
                   <span class="input-group-text" id="basic-addon1">億</span>
                 </div>
@@ -168,10 +169,12 @@
             </th>
             <td>
             <div class='input-group-prepend mb-3'>
-              <input id='limit_price' type='text' class="form-control @error('limit_price') is-invalid @enderror" name='limit_price' value="{{ old('limit_price') }}" required autocomplete="limit_price" autofocus aria-describedby="basic-addon2">
+              <input id='limit_price' type='text' class="@error('limit_price') is-invalid @enderror" name='limit_price' value="{{ old('limit_price') }}" required autocomplete="limit_price" autofocus aria-describedby="basic-addon2">
                 
               <div class='input-group-append'>
                 <span class="input-group-text" id='basic-addon2'>億</span>
+              </div>
+            </div>
                 @error('limit_price')
                   <div class='alert alert-danger'>{{ $message }}</div>
                 @enderror 
@@ -186,9 +189,11 @@
             </th>
             <td>
             <div class='input-group-prepend mb-3'>
-              <input id='full_price' type='text' class="form-control @error('full_price') is-invalid @enderror" name='full_price' value="{{ old('full_price') }}" required autocomplete="full_price" autofocus aria-describedby="basic-addon3">
+              <input id='full_price' type='text' class="@error('full_price') is-invalid @enderror" name='full_price' value="{{ old('full_price') }}" required autocomplete="full_price" autofocus aria-describedby="basic-addon3">
               <div class='input-group-append'>  
               <span class='input-group-text' id='basic-addon3'>万</span>
+            </div>
+          </div>
                 @error('full_price')
                   <div class='alert alert-danger'>{{ $message }}</div>
                 @enderror 
