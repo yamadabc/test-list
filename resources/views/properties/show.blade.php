@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <th>情報入力者</th>
-                <td>{{ $property -> user_name }}</td>
+                <td>{{ $name }}</td>
             </tr>
             <tr>
                 <th>入力日</th>

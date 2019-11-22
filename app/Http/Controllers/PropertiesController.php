@@ -7,6 +7,7 @@ use DB;
 use App\Property;
 use Auth;
 
+
 class PropertiesController extends Controller
 {
     /**
@@ -16,12 +17,14 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        $properties = DB::table('properties')->get();
+        $properties = Property::with('user')->get();
+        
         $this_year = date("Y");
         $this_month = date("m");
-
+        
         return view('properties.index',[
             'properties' => $properties,
+            
             'this_year' => $this_year,
             'this_month' => $this_month,
         ]);
@@ -57,10 +60,11 @@ class PropertiesController extends Controller
             'property_name' =>'required|max:191',
             'prefecture' => 'required|string|max:191',
             'town' => 'required|string|max:191',
-            'house_number'=>'required|string|max:191',
-            'price' => 'required|numeric|max:191',
-            'limit_price' => 'required|numeric|max:191',
-            'full_price' => 'required|numeric|max:191',
+            'house_number'=>'required|string',
+            'price' => 'required|numeric',
+            'limit_price' => 'required|numeric',
+            
+            'full_price' => 'required|numeric',
             'build_year' => 'required|max:191',
             'build_month' => 'required|max:191',
             'structure' =>'required|max:191',
@@ -96,11 +100,13 @@ class PropertiesController extends Controller
     public function show($id)
     {
         $property = DB::table('properties')->find($id);
+        $name = property::find($id)->user->name;
         $this_year = date("Y");
         $this_month = date("m");
         
         return view('properties.show',[
             'property' => $property,
+            'name' => $name,
             'this_year' => $this_year,
             'this_month' => $this_month,
         ]);

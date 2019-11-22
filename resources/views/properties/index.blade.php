@@ -21,10 +21,11 @@
         <th>満室想定(万)</th>
     </tr>
     @foreach($properties as $property)
+   
     <tr>
         <td>{{ $property-> created_at }}</td>
         <td>{{ $property -> updated_at }}</td>
-        <td>{{ $property -> user_name }}</td>
+        <td>{{ $property ->user->name }}</td>
         @if( $property->status =='要返答')
         <td class='text-white bg-danger'>{{ $property -> status }}</td>
         @elseif( $property -> status == '返答待ち')
@@ -63,6 +64,7 @@
         <td>{{ $property -> full_price }}</td>
     </tr>
     @endforeach
+    
 </table>
 
 @endsection
